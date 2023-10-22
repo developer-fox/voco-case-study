@@ -20,6 +20,37 @@ class AppFonts{
     color: Colors.white,
   );
 
+  static TextStyle elevatedButtonTextStyle = AppFonts.font.copyWith(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    letterSpacing: 1
+  );
+
+  static TextStyle textFieldHintStyle = AppFonts.font.copyWith(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: textStyleGreyColor2
+  );
+
+  static TextStyle textFieldLabelStyle = AppFonts.font.copyWith(
+    fontWeight: FontWeight.w400,
+    fontSize: 13,
+    color: textStyleGreyColor2
+  );
+
+  static TextStyle textFieldInputStyle = AppFonts.font.copyWith(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    letterSpacing: 1,
+    color: textStyleBlackColor
+  );
+
+  static TextStyle pageDescriptionStyle = AppFonts.font.copyWith(
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: textStyleBlackColor,
+    letterSpacing: 1
+  );
 
 
 }

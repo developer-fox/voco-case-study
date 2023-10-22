@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voco_case_study/core/constants/app/app_constants.dart';
 import 'package:voco_case_study/core/constants/enums/locale_keys_enum.dart';
 import 'package:voco_case_study/core/init/language/language_manager.dart';
+import 'package:voco_case_study/core/init/network/connectivity/connectivity_bloc.dart';
 import 'package:voco_case_study/core/init/theme/app_theme_light.dart';
 import 'package:voco_case_study/view/home/home_view.dart';
 import 'package:voco_case_study/view/login/login_view.dart';
@@ -45,19 +46,24 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationDelegates,
-          theme: AppThemeLight.instance.theme,
-          locale: context.locale,
-          onGenerateRoute: NavigationRoute.instance.generateRoute,
-          navigatorKey: NavigationService.instance.navigatorKey,
-          home: isLogined ? const HomeView() : const LoginView(),
-        );
-      }
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_)=> ConnectivityBloc()),
+      ],
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+            theme: AppThemeLight.instance.theme,
+            locale: context.locale,
+            onGenerateRoute: NavigationRoute.instance.generateRoute,
+            navigatorKey: NavigationService.instance.navigatorKey,
+            home: isLogined ? const HomeView() : const LoginView(),
+          );
+        }
+      ),
     );
   }
 }
