@@ -5,9 +5,14 @@
     "email": "E-posta",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
-    "haventAccount": "Hesabın Yok Mu?"
+    "haventAccount": "Hesabın Yok Mu?",
+    "loginUnsuccessful": "Giriş işlemi başarısız"
   },
   "register_view": {
-    "haveAccount": "Hesabın Var Mı?"
+    "haveAccount": "Hesabın Var Mı?",
+    "registerUnsuccessful": "Kayıt işlemi başarısız."
+  },
+  "home_view": {
+    "appbarTitle": "Ana Sayfa"
   }
 }

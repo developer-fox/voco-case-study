@@ -6,8 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voco_case_study/components/components.dart';
 import 'package:voco_case_study/core/base/view/base_view.dart';
+import 'package:voco_case_study/core/constants/enums/locale_keys_enum.dart';
 import 'package:voco_case_study/core/extension/context_extension.dart';
 import 'package:voco_case_study/core/extension/string_extension.dart';
+import 'package:voco_case_study/core/init/cache/locale_manager.dart';
 import 'package:voco_case_study/core/init/language/locale_keys.g.dart';
 import 'package:voco_case_study/core/init/network/models/network_bloc_listener.dart';
 import 'package:voco_case_study/core/init/network/models/unmodified_response_model.dart';
@@ -21,6 +23,7 @@ class LoginView extends ConsumerWidget with LoginController{
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    LocaleManager.instance.setBoolValue(PreferencesKeys.is_logined, true);
     return NetworkBlocListener<UnmodifiedResponseDataModel>(
       onLoading: (context) => context.read<LoadingCubit>().changeLoadingStatus(true),
       onInvalidValueError: onLoginError,

@@ -6,10 +6,12 @@ import '../../core/extension/context_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/states/loading_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
+import '../../models/endpoints/responses/users.dart';
 // area
 part "./area/loading_area.dart";
 // button
 part "./button/authentication_button.dart";
 // input
 part "./input/default_textfield.dart";
+// tile
+part "./tile/user_tile.dart";

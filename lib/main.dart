@@ -9,6 +9,7 @@ import 'package:voco_case_study/core/init/network/bloc/network_bloc.dart';
 import 'package:voco_case_study/core/init/network/connectivity/connectivity_bloc.dart';
 import 'package:voco_case_study/core/init/network/models/unmodified_response_model.dart';
 import 'package:voco_case_study/core/init/theme/app_theme_light.dart';
+import 'package:voco_case_study/models/endpoints/responses/users.dart';
 import 'package:voco_case_study/models/states/loading_cubit.dart';
 import 'package:voco_case_study/view/home/home_view.dart';
 import 'package:voco_case_study/view/login/login_view.dart';
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_)=> ConnectivityBloc()),
         BlocProvider(create: (_)=> LoadingCubit(false)),
         BlocProvider(create: (_)=> NetworkBloc<UnmodifiedResponseDataModel>()),
+        BlocProvider(create: (_)=> NetworkBloc<UsersResponseModel>()),
       ],
       child: Builder(
         builder: (context) {

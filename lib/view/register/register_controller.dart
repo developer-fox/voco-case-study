@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voco_case_study/core/constants/enums/locale_keys_enum.dart';
 import 'package:voco_case_study/core/constants/navigation/navigation_constants.dart';
+import 'package:voco_case_study/core/extension/string_extension.dart';
 import 'package:voco_case_study/core/init/cache/locale_manager.dart';
+import 'package:voco_case_study/core/init/language/locale_keys.g.dart';
 import 'package:voco_case_study/core/init/navigation/navigation_service.dart';
 import 'package:voco_case_study/core/init/network/bloc/network_bloc.dart';
 import 'package:voco_case_study/core/init/network/models/unmodified_response_model.dart';
@@ -78,7 +80,7 @@ final authProvider = StateProvider<AuthModel>((ref) => AuthModel(isUsernameValid
 
   void onLoginError(BuildContext context, NetworkError error){
     context.read<LoadingCubit>().changeLoadingStatus(false);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Kayıt işlemi başarısız")));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(LocaleKeys.register_view_registerUnsuccessful.locale)));
   }
 
 }
