@@ -1,11 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voco_case_study/core/constants/app/app_constants.dart';
 import 'package:voco_case_study/core/constants/enums/locale_keys_enum.dart';
 import 'package:voco_case_study/core/init/language/language_manager.dart';
+import 'package:voco_case_study/core/init/network/bloc/network_bloc.dart';
 import 'package:voco_case_study/core/init/network/connectivity/connectivity_bloc.dart';
+import 'package:voco_case_study/core/init/network/models/unmodified_response_model.dart';
 import 'package:voco_case_study/core/init/theme/app_theme_light.dart';
+import 'package:voco_case_study/models/states/loading_cubit.dart';
 import 'package:voco_case_study/view/home/home_view.dart';
 import 'package:voco_case_study/view/login/login_view.dart';
 
@@ -19,12 +23,14 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   LocaleManager.preferencesInit();
   runApp(
-    EasyLocalization(
-     supportedLocales: LanguageManager.instance.supportedLocales,
-     startLocale: LanguageManager.instance.trLocale, 
-     fallbackLocale: LanguageManager.instance.trLocale,
-     path: ApplicationConstants.LANG_ASSET_PATH,
-      child: MyApp(),
+    ProviderScope(
+      child: EasyLocalization(
+       supportedLocales: LanguageManager.instance.supportedLocales,
+       startLocale: LanguageManager.instance.trLocale, 
+       fallbackLocale: LanguageManager.instance.trLocale,
+       path: ApplicationConstants.LANG_ASSET_PATH,
+        child: MyApp(),
+      ),
     )
   );
 }
@@ -49,6 +55,8 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_)=> ConnectivityBloc()),
+        BlocProvider(create: (_)=> LoadingCubit(false)),
+        BlocProvider(create: (_)=> NetworkBloc<UnmodifiedResponseDataModel>()),
       ],
       child: Builder(
         builder: (context) {
@@ -60,7 +68,7 @@ class _MyAppState extends State<MyApp> {
             locale: context.locale,
             onGenerateRoute: NavigationRoute.instance.generateRoute,
             navigatorKey: NavigationService.instance.navigatorKey,
-            home: isLogined ? const HomeView() : const LoginView(),
+            home: isLogined ? const HomeView() : LoginView(),
           );
         }
       ),

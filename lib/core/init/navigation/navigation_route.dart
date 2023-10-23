@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:voco_case_study/view/login/login_view.dart';
+import 'package:voco_case_study/view/register/register_view.dart';
 import "../../constants/navigation/navigation_constants.dart";
 
 /// The [NavigationRoute] class makes navigation operations more efficient and manageable over a single instance.
@@ -15,6 +17,10 @@ class NavigationRoute {
   /// This is how routes to be followed according to the route statics in [NavigationConstants] are defined in [generateRoute].
   Route<dynamic> generateRoute(RouteSettings args) {
     switch (args.name) {
+      case NavigationConstants.login_view:
+        return normalNavigate(LoginView());
+      case NavigationConstants.register_view:
+        return normalNavigate(RegisterView());
       default:
         return normalNavigate(emptyScaffold);
     }
