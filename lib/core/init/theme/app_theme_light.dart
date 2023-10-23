@@ -22,7 +22,7 @@ class AppThemeLight{
     dividerColor: const Color.fromRGBO(236, 236, 236, 1),
     colorScheme:  ColorScheme(
       brightness: Brightness.light,
-      primary:  const Color.fromRGBO(63, 115, 255, 1),
+      primary:  Color.fromARGB(255, 9, 55, 220),
       onPrimary: Colors.white, 
       secondary: const Color.fromRGBO(218, 218, 218, 1), 
       onSecondary: Colors.white,
@@ -48,7 +48,7 @@ class AppThemeLight{
       iconTheme: const IconThemeData(
         color: Colors.white
       ),
-      color:   const Color.fromRGBO(63, 115, 255, 1),
+      color:   Color.fromARGB(255, 9, 55, 220),
       shadowColor: const Color.fromRGBO(236, 236, 236, 1),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
