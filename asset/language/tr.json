@@ -6,5 +6,8 @@
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
     "haventAccount": "Hesabın Yok Mu?"
+  },
+  "register_view": {
+    "haveAccount": "Hesabın Var Mı?"
   }
 }

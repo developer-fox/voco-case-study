@@ -67,6 +67,15 @@ class NetworkManagement{
     );
     _dio = Dio(baseOptions);
 
+    _dio.interceptors.add(InterceptorsWrapper(
+      onError: (e, handler) {
+        final createdResponse = Response(
+          requestOptions: e.requestOptions,
+          data: null,
+        );
+        return handler.resolve(e.response ?? createdResponse);
+      },
+    ));
   }
 
   // method for get requests

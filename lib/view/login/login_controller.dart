@@ -78,7 +78,8 @@ final authProvider = StateProvider<AuthModel>((ref) => AuthModel(isUsernameValid
   }
 
   void onLoginError(BuildContext context, NetworkError error){
-    
+    context.read<LoadingCubit>().changeLoadingStatus(false);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Giriş işlemi başarısız")));
   }
 
 }

@@ -8,5 +8,7 @@ abstract class  LocaleKeys {
   static const login_view_register = 'login_view.register';
   static const login_view_haventAccount = 'login_view.haventAccount';
   static const login_view = 'login_view';
+  static const register_view_haveAccount = 'register_view.haveAccount';
+  static const register_view = 'register_view';
 
 }

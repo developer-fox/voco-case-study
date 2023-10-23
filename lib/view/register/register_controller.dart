@@ -2,13 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:voco_case_study/core/constants/enums/locale_keys_enum.dart';
 import 'package:voco_case_study/core/constants/navigation/navigation_constants.dart';
+import 'package:voco_case_study/core/init/cache/locale_manager.dart';
 import 'package:voco_case_study/core/init/navigation/navigation_service.dart';
 import 'package:voco_case_study/core/init/network/bloc/network_bloc.dart';
 import 'package:voco_case_study/core/init/network/models/unmodified_response_model.dart';
 import 'package:voco_case_study/core/init/network/network_manager.dart';
 import 'package:voco_case_study/models/endpoints/requests/auth_request.dart';
-
+import 'package:voco_case_study/models/states/loading_cubit.dart';
 import '../../models/riverpod_models/auth_model.dart';
 
 mixin RegisterController on Widget{
@@ -58,14 +60,25 @@ final authProvider = StateProvider<AuthModel>((ref) => AuthModel(isUsernameValid
     usernameController.dispose();
   }
 
-  void onLoginButton(BuildContext context){
+  void onLoginButton(){
+    NavigationService.instance.navigateToPage(path: NavigationConstants.login_view);
+  }
+
+  void onRegisterButton(BuildContext context){
     var requestModel = AuthRequest(username: usernameController.text, email: emailController.text, password: passwordController.text);
-    var requestMethod = NetworkManagement.instance.postDio("/login", requestModel: requestModel);
+    var requestMethod = NetworkManagement.instance.postDio("/register", requestModel: requestModel);
     context.read<NetworkBloc<UnmodifiedResponseDataModel>>().add(HttpRequestEvent(requestMethod: requestMethod));
   }
 
-  void onRegisterButton(){
-    NavigationService.instance.navigateToPage(path: NavigationConstants.register_view);
+  void onLoginSuccess(BuildContext context, NetworkSuccess<UnmodifiedResponseDataModel> success){
+    context.read<LoadingCubit>().changeLoadingStatus(false);
+    LocaleManager.instance.setBoolValue(PreferencesKeys.is_logined, true);
+    NavigationService.instance.navigateToPageClear(path: NavigationConstants.home_view);
+  }
+
+  void onLoginError(BuildContext context, NetworkError error){
+    context.read<LoadingCubit>().changeLoadingStatus(false);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Kayıt işlemi başarısız")));
   }
 
 }
